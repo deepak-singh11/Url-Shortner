@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes,Route, Navigate, useNavigate } from "react-router-dom";
 import { updateUserData } from "./redux/slices/userSlice";
 import { updateTokenExpiry } from "./redux/slices/userSlice";
 import { useDispatch } from "react-redux";
@@ -40,7 +40,6 @@ export default function App() {
   return (
     <>
       <Toaster />
-      {/* <Router> */}
       <Routes>
         <Route path="/" element={userData ? <Navigate to={"/home"} /> : <Login />} />
         <Route path="/signup" element={userData ? <Navigate to={"/home"} /> : <Signup />} />
@@ -49,7 +48,6 @@ export default function App() {
         <Route path="/url-stats/:slug" element={userData ? <URLStats /> : <Navigate to={"/"} />}></Route>
         <Route path="/profile" element={<Profile/>}></Route>
       </Routes>
-      {/* </Router> */}
     </>
   );
 }

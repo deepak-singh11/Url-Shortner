@@ -25,7 +25,8 @@ const DevicePieChart = () => {
                 `${name}: ${(percent * 100).toFixed(0)}%`
               }
             >
-              {deviceData.map((entry, index) => (
+              {console.log("deviceData inside Device PieChart:",deviceData)}
+              {deviceData.map((_:{name:string,count:number}, index:number) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>

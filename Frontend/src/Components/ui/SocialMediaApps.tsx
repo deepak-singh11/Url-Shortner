@@ -1,4 +1,4 @@
-import { SiLinkedin, SiYoutube, SiWhatsapp, SiFacebook, SiGmail } from "react-icons/si";
+
 
 const SocialMediaApps = () => {
     return (
