@@ -33,8 +33,8 @@ interface UrlStats {
 const URLStats = () => {
 
     const [showDetailedStyle, setShowDetailedStyle] = useState(false);
-    
-    const { urlStats, clickedAtData, deviceData } = useSelector((state:RootState) => state.urlStats)
+
+    const { urlStats, clickedAtData, deviceData } = useSelector((state: RootState) => state.urlStats)
 
     console.log("urlStats value is: ", urlStats, clickedAtData, deviceData)
 
@@ -43,79 +43,76 @@ const URLStats = () => {
     const location = useLocation();
     const urlData = location.state?.urlData;
 
-    const clickedAtArray: string[] = [];
-    const deviceArray: string[] = [];
-    const referrerArray: string[] = [];
-    const countryArray: string[] = [];
-    const cityArray: string[] = [];
     // Extracting slug from params
     const { slug } = useParams<{ slug?: string }>();
 
-    const getOrdinal = (n:number) => {
+    const getOrdinal = (n: number) => {
         const s = ["th", "st", "nd", "rd"];
         const v = n % 100;
         return n + (s[(v - 20) % 10] || s[v] || s[0]);
     };
 
-    // fetching url
-    const fetchUrlStats = async ():Promise<void>=> {
-        const response = await axios.get(`http://localhost:3000/api/v1/url/slugStats/${slug}`, { withCredentials: true })
-        console.log(response.data);
-        const urlStatsArray = response.data.slugInfo;
-        console.log("urlStatsArray value is: ",urlStatsArray);
-        
-        // Extracting info from Url Stats object
-        urlStatsArray.map((urlStat: UrlStats) => {
-            clickedAtArray.push(urlStat.clickedAt);
-            deviceArray.push(urlStat.device);
-            referrerArray.push(urlStat.referrer);
-            countryArray.push(urlStat.location?.country);
-            cityArray.push(urlStat.location?.city);
-        });
-
-        // ClickedAt Dates--> Right Format
-        const formattedDates = clickedAtArray.map(dateStr => {
-            const date = new Date(dateStr);
-            const weekday = date.toLocaleString('en-US', { weekday: 'short' });
-            const day = getOrdinal(date.getDate());
-            const month = date.toLocaleString('en-US', { month: 'long' });
-            return `${weekday} ${day} ${month}`;
-        });
-
-        // Map Making method:
-        function getFrequencyMap(arr: (string | undefined)[]) {
-            const map: { [key: string]: number } = {};
-            for (const item of arr) {
-                if (!item) continue;
-                map[item] = (map[item] || 0) + 1;
-            }
-            return Object.entries(map)
-                .map(([name, count]) => ({ name, count }))
-                .sort((a, b) => b.count - a.count); // Sort descending
+    // Map Making method:
+    function getFrequencyMap(arr: (string | undefined)[]) {
+        const map: { [key: string]: number } = {};
+        for (const item of arr) {
+            if (!item) continue;
+            map[item] = (map[item] || 0) + 1;
         }
-
-        const clickedAtData = getFrequencyMap(formattedDates);
-        const referrerData = getFrequencyMap(referrerArray);
-        const countryData = getFrequencyMap(countryArray);
-        const cityData = getFrequencyMap(cityArray);
-        const deviceData = getFrequencyMap(deviceArray);
-
-
-        // Saving Format Dates to Store
-        dispatch(updateClickedAtDates(clickedAtData));
-        dispatch(updateReferrerData(referrerData));
-        dispatch(updateCountryData(countryData));
-        dispatch(updateCityData(cityData));
-        dispatch(updateDeviceData(deviceData));
-
+        return Object.entries(map)
+            .map(([name, count]) => ({ name, count }))
+            .sort((a, b) => b.count - a.count); // Sort descending
     }
 
+    // Fetching url
     useEffect(() => {
+        const fetchUrlStats = async (): Promise<void> => {
+            const response = await axios.get(`http://localhost:3000/api/v1/url/slugStats/${slug}`, { withCredentials: true })
+            console.log(response.data);
+            const urlStatsArray = response.data.slugInfo;
+            console.log("urlStatsArray value is: ", urlStatsArray);
+
+            const clickedAtArray: string[] = [];
+            const deviceArray: string[] = [];
+            const referrerArray: string[] = [];
+            const countryArray: string[] = [];
+            const cityArray: string[] = [];
+
+            // ClickedAt Dates--> Right Format
+            const formattedDates = clickedAtArray.map(dateStr => {
+                const date = new Date(dateStr);
+                const weekday = date.toLocaleString('en-US', { weekday: 'short' });
+                const day = getOrdinal(date.getDate());
+                const month = date.toLocaleString('en-US', { month: 'long' });
+                return `${weekday} ${day} ${month}`;
+            });
+
+            // Extracting info from Url Stats object
+            urlStatsArray.map((urlStat: UrlStats) => {
+                clickedAtArray.push(urlStat.clickedAt);
+                deviceArray.push(urlStat.device);
+                referrerArray.push(urlStat.referrer);
+                countryArray.push(urlStat.location?.country);
+                cityArray.push(urlStat.location?.city);
+            });
+
+            const clickedAtData = getFrequencyMap(formattedDates);
+            const referrerData = getFrequencyMap(referrerArray);
+            const countryData = getFrequencyMap(countryArray);
+            const cityData = getFrequencyMap(cityArray);
+            const deviceData = getFrequencyMap(deviceArray);
+
+            // Saving Format Dates to Store
+            dispatch(updateClickedAtDates(clickedAtData));
+            dispatch(updateReferrerData(referrerData));
+            dispatch(updateCountryData(countryData));
+            dispatch(updateCityData(cityData));
+            dispatch(updateDeviceData(deviceData));
+
+        }
         fetchUrlStats();
         setShowDetailedStyle(true);
-    }, []);
-
-
+    }, [dispatch, slug]);
 
     return (
         <div>
