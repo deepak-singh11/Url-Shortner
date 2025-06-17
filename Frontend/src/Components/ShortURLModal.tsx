@@ -60,9 +60,8 @@ const ShortURLModal = ({ isModalOpen,setIsModalOpen, newShortUrl, }: ModalOpenTy
                                 <Copy />
                                 <span>Copy link</span>
                             </div>
-
+                            
                         </div>
-
                     </div>
                     <SocialMediaApps/>
                     <div className="modal-action">

@@ -1,51 +1,73 @@
+import { updateClickedAtDates, updateDeviceData, updateReferrerData, updateCountryData, updateCityData } from "@/redux/slices/urlStatsSlice";
 import DashboardOutlineStructure from "@/Components/ui/DashboardOutlineStructure";
 import DashboardCardContainer from "@/Components/DashboardCardContainer";
+import ReferrerPirChart from "@/Components/charts/ReferrerPirChart";
+import CountryBarChart from "@/Components/charts/CountryBarChart";
+import DevicePieChart from "@/Components/charts/DevicePieChart";
+import ClickLineChart from "@/Components/charts/ClickLineChart";
+import CityBarChart from "@/Components/charts/CityBarChart";
 import { useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react";
-import ClickLineChart from "@/Components/charts/ClickLineChart";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import type { RootState } from "@/redux/store";
 import axios from "axios";
-import DevicePieChart from "@/Components/charts/DevicePieChart";
-import { updateClickedAtDates, updateDeviceData, updateReferrerData, updateCountryData, updateCityData } from "@/redux/slices/urlStatsSlice";
-import ReferrerPirChart from "@/Components/charts/ReferrerPirChart";
-import CountryBarChart from "@/Components/charts/CountryBarChart";
-import CityBarChart from "@/Components/charts/CityBarChart";
+
+interface LocationType {
+    country: string,
+    city: string,
+}
+
+interface UrlStats {
+    clickedAt: string;
+    device: string;
+    location: LocationType;
+    referrer: string;
+    slug: string;
+    __v: string;
+    _id: string;
+
+}
 
 const URLStats = () => {
 
     const [showDetailedStyle, setShowDetailedStyle] = useState(false);
+    
+    const { urlStats, clickedAtData, deviceData } = useSelector((state:RootState) => state.urlStats)
+
+    console.log("urlStats value is: ", urlStats, clickedAtData, deviceData)
 
     // Accessing Data sent from dashboard
     const dispatch = useDispatch();
     const location = useLocation();
     const urlData = location.state?.urlData;
-    const clickedAtArray = [];
-    const deviceArray = [];
-    const referrerArray = [];
-    const countryArray = [];
-    const cityArray = [];
+
+    const clickedAtArray: string[] = [];
+    const deviceArray: string[] = [];
+    const referrerArray: string[] = [];
+    const countryArray: string[] = [];
+    const cityArray: string[] = [];
     // Extracting slug from params
     const { slug } = useParams<{ slug?: string }>();
 
-    const getOrdinal = (n) => {
+    const getOrdinal = (n:number) => {
         const s = ["th", "st", "nd", "rd"];
         const v = n % 100;
         return n + (s[(v - 20) % 10] || s[v] || s[0]);
     };
 
     // fetching url
-    const fetchUrlStats = async () => {
+    const fetchUrlStats = async ():Promise<void>=> {
         const response = await axios.get(`http://localhost:3000/api/v1/url/slugStats/${slug}`, { withCredentials: true })
         console.log(response.data);
         const urlStatsArray = response.data.slugInfo;
 
         // Extracting info from Url Stats object
-        urlStatsArray.map((urlStat) => {
+        urlStatsArray.map((urlStat: UrlStats) => {
             clickedAtArray.push(urlStat.clickedAt);
             deviceArray.push(urlStat.device);
             referrerArray.push(urlStat.referrer);
-            deviceArray.push(urlStat.device);
             countryArray.push(urlStat.location?.country);
             cityArray.push(urlStat.location?.city);
         });
@@ -84,8 +106,12 @@ const URLStats = () => {
         dispatch(updateCountryData(countryData));
         dispatch(updateCityData(cityData));
         dispatch(updateDeviceData(deviceData));
+
         console.log("device data", deviceData)
-        console.log(clickedAtData, referrerData, countryData, cityData);
+        console.log("clickedAT data", clickedAtData);
+        console.log("referrer data", referrerData);
+        console.log("country dAta", countryData);
+        console.log("city Data", cityData);
     }
 
     useEffect(() => {

@@ -2,12 +2,13 @@
 import AuthLayout from "../Components/AuthLayout";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { updateUserData,updateLocation,updateTokenExpiry } from "@/redux/slices/userSlice";
+import { updateUserData, updateLocation, updateTokenExpiry } from "@/redux/slices/userSlice";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import axios from "axios";
+import type { RootState } from "@/redux/store";
 
 
 type LoginDataType = {
@@ -17,13 +18,12 @@ type LoginDataType = {
 
 export default function Login() {
 
-    const dispatch=useDispatch();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    // @ts-expect-error state type, which i solve later
-    const {userData,tokenExpiry}=useSelector(state=>state.user);
+    const { userData, tokenExpiry } = useSelector((state: RootState) => state.user);
 
     const [loginData, setLoginData] = useState<LoginDataType>({ email: "", password: "" });
-    
+
     // Submit-Handler
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -51,8 +51,8 @@ export default function Login() {
             }
         }
     }
-    console.log("userData in store is: ",userData);
-    console.log("token expiry",tokenExpiry);
+    console.log("userData in store is: ", userData);
+    console.log("token expiry", tokenExpiry);
 
     return (
         <AuthLayout imageUrl={"/login_image.png"} imageDescription="Analyze your links and QR Codes as easily as creating them">
@@ -67,11 +67,11 @@ export default function Login() {
                     <button className="w-full border px-4 py-2 rounded flex items-center justify-center gap-2 cursor-pointer">
                         <span><img src="../../public/google-icon.png" className="w-[25px]" alt="" /></span> Continue with Google
                     </button>
-                    
+
                 </div>
 
                 <div className="divider">OR</div>
-                
+
 
                 <form className="space-y-4" onSubmit={submitHandler}>
                     {/* Email */}

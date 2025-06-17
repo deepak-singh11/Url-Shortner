@@ -18,7 +18,6 @@ const FetchAllUrlContent = () => {
 
     const dispatch=useDispatch();
     const [allUrlData, setAllUrlData] = useState<AllUrlType[]>([]);
-    // const {urlData}=useSelector(state=>state.urlData);
     const fetchLinks = async () => {  
         const response = await axios.get("http://localhost:3000/api/v1/url/allSlugs", {
             withCredentials: true

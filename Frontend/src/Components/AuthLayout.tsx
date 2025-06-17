@@ -1,6 +1,4 @@
 // components/AuthLayout.tsx
-import React from "react";
-
 interface AuthLayoutProps {
   children: React.ReactNode;
   imageUrl:string;

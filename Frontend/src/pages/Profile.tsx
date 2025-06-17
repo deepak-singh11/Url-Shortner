@@ -22,8 +22,6 @@ const ProfileComponent=() => {
   const [currentPassword, setCurrentPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
-
-
   
 
   // Display Name Handler 

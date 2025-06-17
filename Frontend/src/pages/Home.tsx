@@ -3,11 +3,11 @@ import ThreeCards from '@/Components/ThreeCards'
 import TopBar from "@/Components/TopBar";
 import MainHomeContent from "@/Components/MainHomeContent";
 import { useSelector } from 'react-redux';
+import type { RootState } from "@/redux/store";
 
 export default function HomePage() {
 
-  // @ts-expect-error ere
-  const {userData}=useSelector(state=>state.user)
+  const {userData}=useSelector((state:RootState)=>state.user)
   console.log(userData);
   // localStorage.removeItem("persist:root")
   // const [navOpen, setNavOpen] = useState(true);
@@ -24,7 +24,6 @@ export default function HomePage() {
           <MainHomeContent />
         </div>
       </div>
-
     </div>
   );
 }
