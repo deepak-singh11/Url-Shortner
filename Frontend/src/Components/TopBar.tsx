@@ -3,7 +3,6 @@ import { Bell } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { updateUserData } from '@/redux/slices/userSlice';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
 
 const TopBar = () => {
 
@@ -13,7 +12,7 @@ const TopBar = () => {
     const { userData } = useSelector(state => state.user);
     const userProfileImage = userData?.profileImage;
 
-    const [profileImage, setProfileImage] = useState<string>(userProfileImage || '');
+    const profileImage = userProfileImage || '';
     const logoutHandler = () => {
         console.log("handler reached");
         dispatch(updateUserData(null));

@@ -14,11 +14,10 @@ const ProfileComponent=() => {
   const { userData } = useSelector(state => state.user);
   const { username, email, profileImage,joinedAt } = userData;
   const formattedDate = new Date(joinedAt).toDateString();
-
   
+  const joinedAtDate=formattedDate;
   const [displayName, setDisplayName] = useState<string>(username || '');
   const [profilePicture, setProfilePicture] = useState<string>(profileImage || '');
-  const [joinedAtDate,setJoinedAtDate]=useState<string>(formattedDate || '');
   const [currentPassword, setCurrentPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');

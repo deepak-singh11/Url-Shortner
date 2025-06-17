@@ -1,7 +1,6 @@
 import { useDispatch } from 'react-redux';
 import ShortURLCreation from '../Components/ShortURLCreation';
 import DashboardCardContainer from './DashboardCardContainer';
-// import { Button } from "../Components/ui/button"
 import { useEffect, useState } from 'react';
 import { updateUrlData } from '@/redux/slices/urlDataSlice';
 import axios from 'axios';
@@ -16,30 +15,30 @@ interface AllUrlType {
     owner?:string;
     slug:string;
     _id:string;
+
 }
 
 const MainHomeContent = () => {
 
     const dispatch=useDispatch();
-    const [showHomeDashboard, setShowHomeDashboard] = useState(true);
+    const showHomeDashboard = true;
     const [newUrlUpdated,setNewUrlUpdated]=useState(false);    
     const [homeShortUrl,sethomeShortUrl]=useState<AllUrlType[]>([]);
 
-
-    // Fetching ShortUrls
-    const fetchLinks = async () => {  
-        const response = await axios.get("http://localhost:3000/api/v1/url/allSlugs", {
-            withCredentials: true
-        });
-        console.log("all url data",response.data);  
-        dispatch(updateUrlData(response.data));
-        sethomeShortUrl(response.data);
-    }
-
+    
     useEffect(()=>{
+        // Fetching ShortUrls
+        const fetchLinks = async () => {  
+            const response = await axios.get("http://localhost:3000/api/v1/url/allSlugs", {
+                withCredentials: true
+            });
+            console.log("all url data",response.data);  
+            dispatch(updateUrlData(response.data));
+            sethomeShortUrl(response.data);
+        }
         fetchLinks();
         setNewUrlUpdated(false);
-    },[newUrlUpdated])
+    },[newUrlUpdated,dispatch])
 
     return (
         <div className="grid grid-cols-2 gap-8">

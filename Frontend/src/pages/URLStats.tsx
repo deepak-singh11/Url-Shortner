@@ -62,7 +62,8 @@ const URLStats = () => {
         const response = await axios.get(`http://localhost:3000/api/v1/url/slugStats/${slug}`, { withCredentials: true })
         console.log(response.data);
         const urlStatsArray = response.data.slugInfo;
-
+        console.log("urlStatsArray value is: ",urlStatsArray);
+        
         // Extracting info from Url Stats object
         urlStatsArray.map((urlStat: UrlStats) => {
             clickedAtArray.push(urlStat.clickedAt);
@@ -107,11 +108,6 @@ const URLStats = () => {
         dispatch(updateCityData(cityData));
         dispatch(updateDeviceData(deviceData));
 
-        console.log("device data", deviceData)
-        console.log("clickedAT data", clickedAtData);
-        console.log("referrer data", referrerData);
-        console.log("country dAta", countryData);
-        console.log("city Data", cityData);
     }
 
     useEffect(() => {

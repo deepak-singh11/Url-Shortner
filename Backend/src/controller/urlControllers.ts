@@ -151,7 +151,6 @@ const redirectFullUrl = async (req: Request, res: Response) => {
             location,
             browser: req.get('User-Agent') || '',
         })
-        console.log("newUrlStats created is: ",newUrlStats);
         // Redirect to Original Url
         return res.redirect(slugDoc.originalUrl);
 
@@ -187,6 +186,7 @@ const slugInfo = async (req: Request, res: Response) => {
         const slugDocument = req.slugDoc;
         console.log(slugDocument);
         res.status(200).json({ message: "slug info fetched successfully", slugDocument });
+        
 
     } catch (error) {
         console.log("error occured in slugInfo route");

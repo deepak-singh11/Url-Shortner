@@ -3,7 +3,11 @@ import axios from "axios";
 import ShortURLModal from "@/Components/ShortURLModal";
 import { toast } from "react-hot-toast";
 
-export default function ShortLinkCreation({ setNewUrlUpdated }) {
+interface ShortLinkCreationProps {
+  setNewUrlUpdated: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function ShortLinkCreation({ setNewUrlUpdated }: ShortLinkCreationProps) {
 
   const [form, setForm] = useState({
     originalUrl: "",

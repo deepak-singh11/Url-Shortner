@@ -14,22 +14,24 @@ interface AllUrlType {
     slug:string;
     _id:string;
 }
+
 const FetchAllUrlContent = () => {
 
     const dispatch=useDispatch();
     const [allUrlData, setAllUrlData] = useState<AllUrlType[]>([]);
-    const fetchLinks = async () => {  
-        const response = await axios.get("http://localhost:3000/api/v1/url/allSlugs", {
-            withCredentials: true
-        });
-        console.log("all url data",response.data);  
-        setAllUrlData(response.data);
-        dispatch(updateUrlData(response.data));
-    }
-
+    
+    
     useEffect(()=>{
+        const fetchLinks = async () => {  
+            const response = await axios.get("http://localhost:3000/api/v1/url/allSlugs", {
+                withCredentials: true
+            });
+            console.log("all url data",response.data);  
+            setAllUrlData(response.data);
+            dispatch(updateUrlData(response.data));
+        }
         fetchLinks();
-    },[])
+    },[dispatch])
 
     return (
         <>
