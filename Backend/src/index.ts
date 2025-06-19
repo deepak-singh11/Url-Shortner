@@ -18,9 +18,13 @@ const PORT=process.env.PORT|| 3000;
 
 app.use(express.json({limit:'5mb'}));
 app.use(cookieParser());
-app.use(cors({
-    origin:"http://localhost:5173",
-    methods:["GET,POST,PUT,DELETE,"],
+app.use(cors({ 
+    origin:["http://localhost:4173",
+            "http://localhost:5173",
+            "http://127.0.0.1:4173", // Another common localhost variant
+            "http://backend-container:3000", // **Crucial: For communication from frontend container to backend container**
+            "http://frontend-container:4173"],
+    methods:["GET,POST,PUT,DELETE"],
     credentials:true,
 
 }))

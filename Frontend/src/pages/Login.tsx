@@ -1,15 +1,14 @@
 // pages/Login.tsx
+import { updateUserData, updateLocation, updateTokenExpiry } from "@/redux/slices/userSlice";
 import AuthLayout from "../Components/AuthLayout";
 import { useNavigate } from "react-router-dom";
+import type { RootState } from "@/redux/store";
 import { useDispatch } from "react-redux";
-import { updateUserData, updateLocation, updateTokenExpiry } from "@/redux/slices/userSlice";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import axios from "axios";
-import type { RootState } from "@/redux/store";
-
 
 type LoginDataType = {
     email: string;
@@ -28,7 +27,7 @@ export default function Login() {
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            const response = await axios.post("http://localhost:3000/api/v1/user/signin", loginData, {
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/user/signin`, loginData, {
                 withCredentials: true
             });
             if (response.status == 200) {
@@ -58,6 +57,7 @@ export default function Login() {
         <AuthLayout imageUrl={"/login_image.png"} imageDescription="Analyze your links and QR Codes as easily as creating them">
             <div className="w-full max-w-md">
                 <h2 className="text-2xl font-bold mb-2">Log in and start sharing</h2>
+
                 <p className="mb-4 text-sm">
                     Don’t have an account?{" "}
                     <Link to={"/signup"} className="text-blue-600 font-medium">Sign up</Link>
@@ -65,7 +65,7 @@ export default function Login() {
 
                 <div className="space-y-3">
                     <button className="w-full border px-4 py-2 rounded flex items-center justify-center gap-2 cursor-pointer">
-                        <span><img src="../../public/google-icon.png" className="w-[25px]" alt="" /></span> Continue with Google
+                        <span><img src="/google-icon.png" className="w-[25px]" alt="" /></span> Continue with Google
                     </button>
 
                 </div>

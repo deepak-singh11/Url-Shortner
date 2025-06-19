@@ -29,7 +29,7 @@ export default function ShortLinkCreation({ setNewUrlUpdated }: ShortLinkCreatio
     setIsLoading(true);
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/api/v1/url/create", form, {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/url/create`, form, {
         withCredentials: true
       })
       await delay(1000)

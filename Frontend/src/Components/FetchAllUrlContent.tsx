@@ -23,7 +23,7 @@ const FetchAllUrlContent = () => {
     
     useEffect(()=>{
         const fetchLinks = async () => {  
-            const response = await axios.get("http://localhost:3000/api/v1/url/allSlugs", {
+            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/url/allSlugs`, {
                 withCredentials: true
             });
             console.log("all url data",response.data);  

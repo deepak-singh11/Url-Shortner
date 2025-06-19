@@ -24,7 +24,7 @@ export default function Signup() {
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3000/api/v1/user/signup", signupData, {
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/user/signup`, signupData, {
                 withCredentials: true
             });
 
@@ -64,11 +64,11 @@ export default function Signup() {
 
                 <div className="space-y-3">
                     <button className="w-full border px-4 py-2 rounded flex items-center justify-center gap-2 cursor-pointer">
-                        <span><img src="../../public/google-icon.png" className="w-[25px]" alt="" /></span> Continue with Google
+                        <span><img src="/google-icon.png" className="w-[25px]" alt="" /></span> Continue with Google
                     </button>
                 </div>
 
-                <div className="divider">OR</div>
+                <div className="divider">OR</div>   
 
 
                 <form className="space-y-4" onSubmit={submitHandler}>

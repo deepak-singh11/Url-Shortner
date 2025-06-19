@@ -26,9 +26,13 @@ const DevicePieChart = () => {
               }
             >
               {console.log("deviceData inside Device PieChart:",deviceData)}
-              {deviceData.map((_:{name:string,count:number}, index:number) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
+              { deviceData? (deviceData.map((_:{name:string,count:number}, index:number) => (
+                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                            ))
+                            )
+                            :
+                            null
+              }
             </Pie>
             <Tooltip />
             <Legend />

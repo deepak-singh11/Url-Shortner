@@ -67,7 +67,7 @@ const URLStats = () => {
     // Fetching url
     useEffect(() => {
         const fetchUrlStats = async (): Promise<void> => {
-            const response = await axios.get(`http://localhost:3000/api/v1/url/slugStats/${slug}`, { withCredentials: true })
+            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/url/slugStats/${slug}`, { withCredentials: true })
             console.log(response.data);
             const urlStatsArray = response.data.slugInfo;
             console.log("urlStatsArray value is: ", urlStatsArray);
@@ -115,33 +115,34 @@ const URLStats = () => {
     }, [dispatch, slug]);
 
     return (
-        <div>
-            <DashboardOutlineStructure showDetailedStyle={showDetailedStyle} >
-                <DashboardCardContainer urlData={urlData} showDetailedStyle={true} />
-            </DashboardOutlineStructure>
-            {/* <div className='w-[100%] flex justify-center bg-[#F4F6FA]  '>
-                <div className="w-[78%] py-5 border-b-2 border-gray-300">
-                    <h1 className={`text-4xl  font-bold `}> Analytics</h1>
-                </div>
-            </div> */}
-            <div className=" border-blue-500  bg-[#F4F6FA] flex justify-center items-center mb-10 pb-10">
-                <div className=" border-pink-600 w-[80%]">
-                    <div className="">
-                        <div className="bg-white  rounded-lg mt-5 px-10 pb-5">
-                            <ClickLineChart />
-                        </div>
-                        <div className="flex mt-5 gap-5">
-                            <CountryBarChart />
-                            <CityBarChart />
-                        </div>
-                        <div className="flex mt-5 gap-5">
-                            <DevicePieChart />
-                            <ReferrerPirChart />
+        <>
+            {urlData ? (
+                <div>
+                    <DashboardOutlineStructure showDetailedStyle={showDetailedStyle} >
+                        <DashboardCardContainer urlData={urlData} showDetailedStyle={true} />
+                    </DashboardOutlineStructure>
+
+                    <div className=" border-blue-500  bg-[#F4F6FA] flex justify-center items-center mb-10 pb-10">
+                        <div className=" border-pink-600 w-[80%]">
+                            <div className="">
+                                <div className="bg-white  rounded-lg mt-5 px-10 pb-5">
+                                    <ClickLineChart />
+                                </div>
+                                <div className="flex mt-5 gap-5">
+                                    <CountryBarChart />
+                                    <CityBarChart />
+                                </div>
+                                <div className="flex mt-5 gap-5">
+                                    <DevicePieChart />
+                                    <ReferrerPirChart />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            ) : null}
+
+        </>
     )
 }
 

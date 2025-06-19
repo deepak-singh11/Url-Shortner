@@ -53,6 +53,7 @@ const signupRoute = async (req: Request, res: Response) => {
                 expiresAt: Date.now() + expiresAt,
             }
         });
+        
 
     } catch (error) {
         console.log("error occur in signup route", error);
@@ -90,10 +91,12 @@ const signinRoute = async (req: Request, res: Response) => {
         const expiresAt = 3600000;
         res.cookie('token', token, {
             httpOnly: true,      // Can't be accessed by JavaScript
-            secure: true,        // Only sent over HTTPS
-            sameSite: 'strict',  // Prevents CSRF
+            secure: false,        // Only sent over HTTPS
+            sameSite: 'lax',  // Prevents CSRF
             maxAge: expiresAt      // 1 hour
         })
+
+        console.log("info send");
 
         return res.status(200).json({
             message: "LoggedIn Succesfully",
@@ -105,6 +108,7 @@ const signinRoute = async (req: Request, res: Response) => {
             },
             tokenExpiry: { expiresAt: Date.now() + expiresAt, }
         });
+        
 
     } catch (error) {
         console.log("error occur in signup route", error);

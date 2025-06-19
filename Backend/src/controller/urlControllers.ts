@@ -3,7 +3,7 @@ import { urlStatsModel } from '../model/urlStats.js';
 import { Response, Request } from "express";
 import { UAParser } from "ua-parser-js";
 import * as cheerio from 'cheerio';
-import { nanoid } from "nanoid";
+import  {nanoid}  from "nanoid";
 import mongoose from "mongoose";
 import axios from 'axios';
 

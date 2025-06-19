@@ -30,7 +30,7 @@ const ProfileComponent=() => {
 
     else {
       try {
-        const response = await axios.put(`${import.meta.env.VITE_BASE_URL}api/v1/user/update-profile`, { displayName, currentPassword, newPassword }, {
+        const response = await axios.put(`${import.meta.env.VITE_BASE_URL}/api/v1/user/update-profile`, { displayName, currentPassword, newPassword }, {
           withCredentials: true,
         });
 
@@ -62,7 +62,7 @@ const ProfileComponent=() => {
       try {
         console.log("in the updateUsernamePAsswrod");
         console.log("sending data", { displayName, newPassword, currentPassword })
-        const response = await axios.put(`${import.meta.env.VITE_BASE_URL}api/v1/user/update-profile`, { currentPassword, newPassword }, {
+        const response = await axios.put(`${import.meta.env.VITE_BASE_URL}/api/v1/user/update-profile`, { currentPassword, newPassword }, {
           withCredentials: true,
         });
 
@@ -84,7 +84,7 @@ const ProfileComponent=() => {
   // Delete Account
   const deleteAccountHandler = async () => {
     try {
-      const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}api/v1/user/delete-profile`, {
+      const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/v1/user/delete-profile`, {
         withCredentials: true,
       });
 
@@ -112,7 +112,7 @@ const ProfileComponent=() => {
       const base64data = reader.result;
 
       try {
-        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}api/v1/user/profileImage-uploader`, { image: base64data }, {
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/user/profileImage-uploader`, { image: base64data }, {
           withCredentials: true,
         });
         console.log(response);

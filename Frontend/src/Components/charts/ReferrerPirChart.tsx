@@ -25,9 +25,12 @@ const ReferrerPirChart = () => {
                             `${name}: ${(percent * 100).toFixed(0)}%`
                         }
                     >
-                        {data.map((_:{name:string,count:number}, index:number) => (
-                            <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                        ))}
+                        {data ? (data.map((_: { name: string, count: number }, index: number) => (
+                                                <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                                         ))
+                                ) 
+                                : 
+                                null}
                     </Pie>
                     <Tooltip />
                     <Legend />
