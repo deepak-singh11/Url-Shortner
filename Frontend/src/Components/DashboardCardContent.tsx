@@ -46,7 +46,7 @@ const DashboardCardContent = ({ appShareModal, setAppShareModal, displayCreatedA
                 {/* ShortUrl */}
                 <div className="mt-2 text-blue-700 font-bold flex  hover:underline">
                     <a href={`${urlData?.originalUrl}`} target="_blank" rel="noopener noreferrer">
-                        {import.meta.env.VITE_BASE_URL + urlData?.slug}
+                        {import.meta.env.VITE_BASE_URL+'/'+ urlData?.slug}
                     </a>
                 </div>
                 {/* Original Url */}

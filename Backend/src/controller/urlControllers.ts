@@ -61,7 +61,7 @@ const createShortUrl = async (req: Request, res: Response) => {
             slug,
             owner: userId,
         }
-
+        
         const title = await fetchTitleFromUrl(originalUrl);
         if (title) {
             urlData.title = title
@@ -74,7 +74,6 @@ const createShortUrl = async (req: Request, res: Response) => {
             if (isNaN(expiryDate.getTime())) {
                 return res.status(400).json({ message: "Invalid date format" });
             }
-
             if (expiryDate <= new Date()) {
                 return res.status(400).json({ message: "Expiry date must be in the future" });
             }
@@ -92,7 +91,6 @@ const createShortUrl = async (req: Request, res: Response) => {
             shortUrl: process.env.BASE_URL + slug,
             message: "slug created successfully",
             newShortUrl,
-            
         });
 
     } catch (error) {

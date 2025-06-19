@@ -16,7 +16,7 @@ const CopyButton = ({slug}:SlugType) => {
 
     return (
         <div onClick={() => {
-            navigator.clipboard.writeText(`${import.meta.env.VITE_BASE_URL}${slug}`);
+            navigator.clipboard.writeText(`${import.meta.env.VITE_BASE_URL}/${slug}`);
             copyButtonTextHandler();
         }}
             className="px-3 py-1  border-gray-300 border bg-gray-200 w-full rounded flex justify-center items-center gap-2 hover:bg-gray-300 h-fit cursor-pointer">
