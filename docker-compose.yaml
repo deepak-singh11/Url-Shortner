@@ -4,88 +4,23 @@ services:
     build: 
       context: ./Backend
       dockerfile: Dockerfile
-    container_name: backend
+    container_name: backend-container
     ports:
       - 3000:3000
     env_file:
-      - .env
-    environment:
-      - PORT=3000
-      - MONGODB_URL
-      - JWT_SECRET
-      - BASE_URL
-      - CLIENT_ID
-      - CLIENT_SECRET
-      - CLOUDINARY_CLOUD_NAME
-      - CLOUDINARY_API_KEY
-      - CLOUDINARY_API_SECRET
-    networks:
-      - app-network
-    
+      - .env.backend   
   frontend:
     build: 
       context: ./Frontend
       dockerfile: Dockerfile
-    container_name: frontend
+      args:
+        VITE_BASE_URL: http://localhost:3000 
+    container_name: frontend-container
     ports:
       - 4173:4173
     env_file:
-      - .env
-    environment:
-      - VITE_BASE_URL
+      - .env.frontend
     depends_on:
       - backend
-    networks:
-      - app-network
 
     
-  
-networks:
-  app-network:
-    driver: "bridge"
-
-# version: "3.8"
-
-# services:
-#   backend:
-#     build:
-#       context: ./Backend
-#       dockerfile: Dockerfile
-#     container_name: backend
-#     ports:
-#       - "5000:5000"
-#     environment:
-#       - MONGO_URL=mongodb://mongo:27017/urlshortner
-#     depends_on:
-#       - mongo
-#     networks:
-#       - app-network
-
-#   frontend:
-#     build:
-#       context: ./Frontend
-#       dockerfile: Dockerfile
-#     container_name: frontend
-#     ports:
-#       - "4173:4173"  # Vite preview port
-#     depends_on:
-#       - backend
-#     networks:
-#       - app-network
-
-#   mongo:
-#     image: mongo:6.0
-#     container_name: mongo
-#     ports:
-#       - "27017:27017"
-#     volumes:
-#       - mongo-data:/data/db
-#     networks:
-#       - app-network
-
-# volumes:
-#   mongo-data:
-
-# networks:
-#   app-network:
-#     driver: bridge
