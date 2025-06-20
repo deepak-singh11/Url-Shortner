@@ -37,7 +37,7 @@ const signupRoute = async (req: Request, res: Response) => {
         const expiresAt = 3600000;
         res.cookie('token', token, {
             httpOnly: true,      // Can't be accessed by JavaScript
-            secure: true,        // Only sent over HTTPS
+            secure: false,        // Only sent over HTTPS
             sameSite: 'none',  // Prevents CSRF
             maxAge: expiresAt      // 1 hour
         })
@@ -88,10 +88,11 @@ const   signinRoute = async (req: Request, res: Response) => {
         if (secret) {
             token = jwt.sign({ id: userExist._id }, secret)
         }
+        
         const expiresAt = 3600000;
         res.cookie('token', token, {
             httpOnly: true,        // Can't be accessed by JavaScript
-            secure: true,          // Only sent over HTTPS
+            secure: false,          // Only sent over HTTPS
             sameSite: 'none',      // Prevents CSRF
             maxAge: expiresAt      // 1 hour
         })
