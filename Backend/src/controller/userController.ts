@@ -38,7 +38,7 @@ const signupRoute = async (req: Request, res: Response) => {
         res.cookie('token', token, {
             httpOnly: true,      // Can't be accessed by JavaScript
             secure: true,        // Only sent over HTTPS
-            sameSite: 'strict',  // Prevents CSRF
+            sameSite: 'none',  // Prevents CSRF
             maxAge: expiresAt      // 1 hour
         })
         return res.status(200).json({
@@ -63,7 +63,7 @@ const signupRoute = async (req: Request, res: Response) => {
 }
 
 // Signin Route
-const signinRoute = async (req: Request, res: Response) => {
+const   signinRoute = async (req: Request, res: Response) => {
     try {
         // All Fields
         const { email, password } = req.body;
@@ -90,9 +90,9 @@ const signinRoute = async (req: Request, res: Response) => {
         }
         const expiresAt = 3600000;
         res.cookie('token', token, {
-            httpOnly: true,      // Can't be accessed by JavaScript
-            secure: false,        // Only sent over HTTPS
-            sameSite: 'lax',  // Prevents CSRF
+            httpOnly: true,        // Can't be accessed by JavaScript
+            secure: true,          // Only sent over HTTPS
+            sameSite: 'none',      // Prevents CSRF
             maxAge: expiresAt      // 1 hour
         })
 
