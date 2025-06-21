@@ -23,7 +23,9 @@ app.use(cors({
     origin:["http://localhost:4173",
             "http://localhost:5173",
             "http://frontend-container:4173",
-            "http://url-shortener.deepak-projects.xyz"],
+            "http://url-shortener.deepak-projects.xyz",
+            "https://url-shortener.deepak-projects.xyz",],
+        
     methods:["GET,POST,PUT,DELETE"],
     credentials:true,
 
