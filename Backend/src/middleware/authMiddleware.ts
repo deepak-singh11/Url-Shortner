@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import jwt, { JwtPayload } from "jsonwebtoken";
 import { userModel } from '../model/userModel.js';
+import jwt, { JwtPayload } from "jsonwebtoken";
+import { Types } from 'mongoose';
 import "dotenv/config";
 
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
@@ -33,7 +34,7 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
             return res.status(404).json({ message: "User not found for this token" }); // User associated with token not found
 
         // Putting id into req.user
-        req.user = decoded.id;
+        req.user = Types.ObjectId.createFromHexString(decoded.id);  // converting string to id   
         req.userDoc=userExist;
 
         

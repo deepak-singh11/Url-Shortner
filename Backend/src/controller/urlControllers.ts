@@ -43,6 +43,7 @@ const createShortUrl = async (req: Request, res: Response) => {
 
 
         const { originalUrl, customSlug, expiresIn, clickLimit } = req.body;
+        
         // Original Url Present?
         if (!originalUrl) {
             return res.status(403).json({ message: "Original Link is required " });
@@ -59,9 +60,9 @@ const createShortUrl = async (req: Request, res: Response) => {
         const urlData: DataType = {
             originalUrl,
             slug,
-            owner: userId,
+            owner:userId,
         }
-        
+
         const title = await fetchTitleFromUrl(originalUrl);
         if (title) {
             urlData.title = title
@@ -84,6 +85,7 @@ const createShortUrl = async (req: Request, res: Response) => {
         if (clickLimit) {
             urlData.clickLimit = clickLimit;
         }
+        
         // New Slug Creation
         const newShortUrl = await urlModel.create(urlData);
 
@@ -92,6 +94,7 @@ const createShortUrl = async (req: Request, res: Response) => {
             message: "slug created successfully",
             newShortUrl,
         });
+
 
     } catch (error) {
         console.log("error occur in createShortUrl", error);

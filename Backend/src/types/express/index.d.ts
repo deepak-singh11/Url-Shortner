@@ -6,7 +6,7 @@ declare global {
   namespace Express {
     interface Request {
       user: Types.ObjectId,
-      slugDoc: UrlDocType,
+      slugDoc: UrlDocTyp
       userDoc: UserModalDocType,
       googleUser?: {
         id: string;
