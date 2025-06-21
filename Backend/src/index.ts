@@ -26,7 +26,7 @@ app.use(cors({
             "http://url-shortener.deepak-projects.xyz",
             "https://url-shortener.deepak-projects.xyz",],
         
-    methods:["GET,POST,PUT,DELETE"],
+    methods:["GET","POST","PUT","DELETE"],
     credentials:true,
 
 }))
