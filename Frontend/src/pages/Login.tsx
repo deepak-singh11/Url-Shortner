@@ -50,6 +50,13 @@ export default function Login() {
             }
         }
     }
+
+    // Google Login Handler
+    const googleLoginHandler=async()=>{
+        const response=await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/google`,{withCredentials:true});
+        console.log(response);
+    }
+
     console.log("userData in store is: ", userData);
     console.log("token expiry", tokenExpiry);
 
@@ -64,7 +71,9 @@ export default function Login() {
                 </p>
 
                 <div className="space-y-3">
-                    <button className="w-full border px-4 py-2 rounded flex items-center justify-center gap-2 cursor-pointer">
+                    <button 
+                        onClick={googleLoginHandler}
+                        className="w-full border px-4 py-2 rounded flex items-center justify-center gap-2 cursor-pointer">
                         <span><img src="/google-icon.png" className="w-[25px]" alt="" /></span> Continue with Google
                     </button>
 

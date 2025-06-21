@@ -9,9 +9,10 @@ import cors from 'cors';
 import "dotenv/config";
 
 // Google imports
-// import googleAuthRoute from './routes/googleAuthRoute.ts.js'
+// import googleAuthRoute from './routes/googleAuthRoute.js'
 // import session from 'express-session';
 // import passport from 'passport';
+// import './auth/google.js';
 
 const app=express();
 const PORT=process.env.PORT|| 3000;
@@ -21,9 +22,8 @@ app.use(cookieParser());
 app.use(cors({ 
     origin:["http://localhost:4173",
             "http://localhost:5173",
-            "http://127.0.0.1:4173", // Another common localhost variant
-            "http://backend-container:3000", // **Crucial: For communication from frontend container to backend container**
-            "http://frontend-container:4173"],
+            "http://frontend-container:4173",
+            "http://url-shortener.deepak-projects.xyz"],
     methods:["GET,POST,PUT,DELETE"],
     credentials:true,
 
@@ -44,6 +44,7 @@ app.use(cors({
 app.get("/:slug",validateShortUrl,redirectFullUrl)
 app.use("/api/v1/url",urlRoutes);
 app.use("/api/v1/user",userRoutes)
+// app.use("/auth",googleAuthRoute);
 
 app.listen(3000, ()=>{
     connectDB();

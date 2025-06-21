@@ -37,10 +37,11 @@ const signupRoute = async (req: Request, res: Response) => {
         const expiresAt = 3600000;
         res.cookie('token', token, {
             httpOnly: true,      // Can't be accessed by JavaScript
-            secure: false,        // Only sent over HTTPS
+            secure: true,        // Only sent over HTTPS
             sameSite: 'none',  // Prevents CSRF
             maxAge: expiresAt      // 1 hour
-        })
+        });
+
         return res.status(200).json({
             message: "Signup Succesfully",
             userData: {
@@ -92,7 +93,7 @@ const   signinRoute = async (req: Request, res: Response) => {
         const expiresAt = 3600000;
         res.cookie('token', token, {
             httpOnly: true,        // Can't be accessed by JavaScript
-            secure: false,          // Only sent over HTTPS
+            secure: true,          // Only sent over HTTPS
             sameSite: 'none',      // Prevents CSRF
             maxAge: expiresAt      // 1 hour
         })
@@ -107,7 +108,7 @@ const   signinRoute = async (req: Request, res: Response) => {
                 profileImage: userExist.profileImage,
                 joinedAt: userExist.joinedAt,
             },
-            tokenExpiry: { expiresAt: Date.now() + expiresAt, }
+            tokenExpiry: { expiresAt: Date.now() + expiresAt}
         });
         
 
@@ -118,6 +119,7 @@ const   signinRoute = async (req: Request, res: Response) => {
 
 }
 
+// ProfileUpdate Route
 const profileUpdateRoute = async (req: Request, res: Response) => {
     try {
         console.log("profile hit");
@@ -158,6 +160,7 @@ const profileUpdateRoute = async (req: Request, res: Response) => {
     }
 }
 
+// ProfileImageUpload Route
 const profileImageUploadRoute = async (req: Request, res: Response) => {
     try {
         const user = req.userDoc;
@@ -188,7 +191,7 @@ const profileImageUploadRoute = async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Cloudinary upload failed' });
     }
 }
-
+// Delete Account Route
 const deleteAccount = async (req: Request, res: Response) => {
     try {
         const userDoc = req.userDoc;

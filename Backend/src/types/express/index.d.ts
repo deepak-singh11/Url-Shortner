@@ -1,15 +1,22 @@
 import { Types } from "mongoose";
 import { UrlDocType } from '../../model/urlModel.js';
-import {UserModalDocType} from '../../model/userModel.js'
+import { UserModalDocType } from '../../model/userModel.js'
 
 declare global {
   namespace Express {
     interface Request {
       user: Types.ObjectId,
-      slugDoc:UrlDocType,
-      userDoc:UserModalDocType,
+      slugDoc: UrlDocType,
+      userDoc: UserModalDocType,
+      googleUser?: {
+        id: string;
+        email: string;
+        username: string;
+        profileImage: string;
+        joinedAt: string;
+      };
     }
   }
 }
 
-export {}; // VERY IMPORTANT: marks this as a module
+export { }; // VERY IMPORTANT: marks this as a module
