@@ -1,0 +1,56 @@
+name: Deploy Backend to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Copy Backend folder to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "Backend"
+          target: "/home/ubuntu/Url-Shortner"
+
+      - name: SSH into EC2 and deploy
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/Url-Shortner/Backend
+
+            echo "Stopping and removing old container..."
+            sudo docker stop url-backend-container || true
+            sudo docker rm url-backend-container || true
+
+            echo "Removing old image..."
+            sudo docker rmi url-backend-image || true
+
+            echo "Building new image..."
+            sudo docker build -t url-backend-image .
+
+            echo "Running new container with env variables from GitHub Secrets..."
+            sudo docker run --name url-backend-container \
+              -e MONGODB_URL="${{ secrets.MONGODB_URL }}" \
+              -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
+              -e BASE_URL="${{ secrets.BASE_URL }}" \
+              -e CLIENT_ID="${{ secrets.CLIENT_ID }}" \
+              -e CLIENT_SECRET="${{ secrets.CLIENT_SECRET }}" \
+              -e CLOUDINARY_CLOUD_NAME="${{ secrets.CLOUDINARY_CLOUD_NAME }}" \
+              -e CLOUDINARY_API_KEY="${{ secrets.CLOUDINARY_API_KEY }}" \
+              -e CLOUDINARY_API_SECRET="${{ secrets.CLOUDINARY_API_SECRET }}" \
+              -p 3000:3000 \
+              --restart always \
+              -d url-backend-image
