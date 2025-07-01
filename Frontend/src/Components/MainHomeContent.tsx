@@ -43,14 +43,14 @@ const MainHomeContent = () => {
     return (
         <div className="grid grid-cols-2 gap-8">
             <div className="bg-white p-6 rounded-xl shadow">
-                <div className="text-2xl mb-4 font-bold text-center "><h2>Getting started with Shortly</h2></div>
+                <div className="text-2xl mb-4 font-bold text-center text-black "><h2>Getting started with Shortly</h2></div>
 
                 <ShortURLCreation setNewUrlUpdated={setNewUrlUpdated}/>
 
             </div>
             {homeShortUrl?(
                 <div className="bg-white p-6 rounded-xl shadow text-center ">
-                <div className="text-2xl mb-4 font-bold text-center  "><h2>Latest Links</h2></div>
+                <div className="text-2xl mb-4 font-bold text-center text-black "><h2>Latest Links</h2></div>
 
                 <div className=" bg-[#5fa0eb2d] flex flex-col justify-center items-center   rounded-xl pb-6 px-2">
                     {homeShortUrl.slice(0, 2).map((urlData) => <DashboardCardContainer urlData={urlData} showHomeDashboard={showHomeDashboard} />)}

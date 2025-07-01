@@ -12,7 +12,7 @@ const TopBar = () => {
     const { userData } = useSelector(state => state.user);
     const userProfileImage = userData?.profileImage;
 
-    const profileImage = userProfileImage || '';
+    const profileImage = userProfileImage || null;
     const logoutHandler = () => {
         console.log("handler reached");
         dispatch(updateUserData(null));

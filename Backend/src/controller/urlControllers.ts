@@ -37,7 +37,7 @@ async function fetchTitleFromUrl(url: string): Promise<string | null> {
 
 const createShortUrl = async (req: Request, res: Response) => {
     try {
-        const userId = req.user;
+        const userId = req.userId;
         if (!userId)
             return res.status(403).json({ message: "Unauthorized access. UserId not provided" });
 
@@ -164,7 +164,7 @@ const redirectFullUrl = async (req: Request, res: Response) => {
 const getAllSlugs = async (req: Request, res: Response) => {
     try {
         console.log("user reached");
-        const id = req.user;
+        const id = req.userId;
         console.log("id is: ", id);
         // Fetching all Slugs
         const allSlug = await urlModel.find({ owner: id }).sort({ createdAt: -1 });
@@ -178,8 +178,6 @@ const getAllSlugs = async (req: Request, res: Response) => {
         console.log("error occur in getAllSlugs", error);
         return res.status(500).json({ message: "Error occur in getAllSlugs route" });
     }
-
-
 }
 
 const slugInfo = async (req: Request, res: Response) => {
@@ -220,7 +218,7 @@ const slugStats = async (req: Request, res: Response) => {
 const redirectUpdate = async (req: Request, res: Response) => {
     try {
         const { slug } = req.params;
-        const { id } = req.user;
+        const  id  = req.userId;
         const body = req.body;
         const isSlugExist = req.slugDoc;
 
@@ -247,8 +245,6 @@ const redirectUpdate = async (req: Request, res: Response) => {
             )
 
         };
-
-
         // Redirect to Original Url
         return res.status(200).json({ message: "Slug updated successfully" });
 

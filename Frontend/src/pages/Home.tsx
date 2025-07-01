@@ -1,20 +1,16 @@
-// import { useState } from "react";
+import MainHomeContent from "@/Components/MainHomeContent";
 import ThreeCards from '@/Components/ThreeCards'
 import TopBar from "@/Components/TopBar";
-import MainHomeContent from "@/Components/MainHomeContent";
-import { useSelector } from 'react-redux';
-import type { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
 
 export default function HomePage() {
 
-  const {userData}=useSelector((state:RootState)=>state.user)
-  console.log(userData);
-  // localStorage.removeItem("persist:root")
-  // const [navOpen, setNavOpen] = useState(true);
-  // const toggleNav = () => setNavOpen(!navOpen);
-
+  // @ts-expect-error state
+  const {userData}=useSelector(state=>state.user);
+  console.log("user data is sent",userData);
+  
   return (
-    <div className="flex min-h-screen w-full border">
+    <div className="flex min-h-screen w-full">
       {/* Center Page */}
       <div className="flex-1 bg-gray-50">
         <TopBar />

@@ -44,7 +44,7 @@ function ClickLineChart() {
   return (
 
     <div className="flex flex-col items-center gap-5">
-      <h3 className="mt-4 text-lg font-semibold">No of Click on Respective Days</h3>
+      <h3 className="mt-4 text-lg font-semibold text-black">No of Click on Respective Days</h3>
       <div style={{ display: "flex", height: 300 }} className=" w-[100%]">
 
         {/* Fixed Y-Axis */}

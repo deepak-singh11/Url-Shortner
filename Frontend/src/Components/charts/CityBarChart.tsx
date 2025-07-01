@@ -7,7 +7,7 @@ const CityBarChart = () => {
     const data=cityData;
   return (
     <div className=' w-[50%] rounded-lg flex flex-col items-center bg-white py-5 '>
-    <h3 className="text-lg font-semibold mb-2">Clicks Based on Cities</h3>
+    <h3 className="text-lg font-semibold mb-2 text-black">Clicks Based on Cities</h3>
     <ResponsiveContainer width="100%" height={300}>
       <BarChart
         layout="vertical"

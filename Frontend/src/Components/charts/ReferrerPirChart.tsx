@@ -11,7 +11,7 @@ const ReferrerPirChart = () => {
 
     return (
         <div className='rounded-lg w-[50%] flex flex-col items-center bg-white py-5'>
-            <h3 className="text-lg font-semibold ">Devices </h3>
+            <h3 className="text-lg font-semibold text-black">Devices </h3>
             <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
                     <Pie

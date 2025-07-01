@@ -17,7 +17,7 @@ const DashboardOutlineStructure = ({children,showDetailedStyle}:Props) => {
                 <div className=' w-[80%]  flex justify-center items-center flex-col '>
 
                     <div 
-                        className='w-[100%] flex justify-between border-b-2 border-gray-200 p-5'>
+                        className='w-[100%] flex justify-between border-b-2 border-gray-200 p-5 text-black'>
                         <h1 onClick={showDetailedStyle?()=>{navigate(-1)}:()=>{}} 
                             className={`${showDetailedStyle?"text-lg":"text-4xl"} ${showDetailedStyle?"":"font-bold"} mb-4 `}>
                                 {showDetailedStyle?<MoveLeft className='cursor-pointer' size={20} />:"Dashboard"}

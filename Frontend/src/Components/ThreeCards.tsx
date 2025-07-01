@@ -9,7 +9,7 @@ const   ThreeCards = () => {
           <img className="w-[90%]" src="/dashboard_links.png" alt="" />
         </div>
         <div className=" w-[50%] flex flex-col justify-center items-center">
-          <div className="text-lg font-bold">Make it short</div>
+          <div className="text-lg font-bold text-black">Make it short</div>
           <Button
             variant="outline"
             className="mt-4 text-blue-600 cursor-pointer hover:scale-105 hover:bg-[#5fa0eb2d] hover:text-blue-700 hover:font-bold"
@@ -25,7 +25,7 @@ const   ThreeCards = () => {
           <img className="w-[90%]" src="/dashboard_qrcs.png" alt="" />
         </div>
         <div className=" w-[50%] flex flex-col justify-center items-center">
-          <div className="text-lg font-bold">Make it scannable</div>
+          <div className="text-lg font-bold text-black">Make it scannable</div>
           <Button
             variant="outline"
             className="mt-4 text-blue-600 cursor-pointer hover:scale-105 hover:bg-[#5fa0eb2d] hover:text-blue-700 hover:font-bold "
@@ -41,7 +41,7 @@ const   ThreeCards = () => {
           <img className="w-[90%]" src="/dashboard_lib.png" alt="" />
         </div>
         <div className="w-[50%] flex flex-col justify-center items-center">
-          <div className="text-lg font-bold">Make a page</div>
+          <div className="text-lg font-bold text-black">Make a page</div>
           <Button
             variant="outline"
             className="mt-4 text-blue-600 cursor-pointer hover:scale-105 hover:bg-[#5fa0eb2d] hover:text-blue-700 hover:font-bold"

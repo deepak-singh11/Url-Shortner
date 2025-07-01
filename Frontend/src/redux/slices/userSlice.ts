@@ -6,6 +6,7 @@ const userSlice=createSlice({
         userData:null,
         tokenExpiry:null,
         location:null,
+        isLoading:true,
     },
     reducers:{
         updateUserData:(state,action)=>{
@@ -16,9 +17,12 @@ const userSlice=createSlice({
         },
         updateLocation:(state,action)=>{
             state.location=action.payload;
+        },
+        updateIsLoading:(state,action)=>{
+            state.isLoading=action.payload;
         }
     }
 });
 
-export const {updateUserData,updateTokenExpiry,updateLocation}=userSlice.actions;
+export const {updateUserData,updateTokenExpiry,updateLocation,updateIsLoading}=userSlice.actions;
 export default userSlice.reducer;

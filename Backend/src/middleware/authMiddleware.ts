@@ -34,7 +34,7 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
             return res.status(404).json({ message: "User not found for this token" }); // User associated with token not found
 
         // Putting id into req.user
-        req.user = Types.ObjectId.createFromHexString(decoded.id);  // converting string to id   
+        req.userId = Types.ObjectId.createFromHexString(decoded.id);  // converting string to id   
         req.userDoc=userExist;
 
         

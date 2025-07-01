@@ -57,7 +57,7 @@ const DashboardCardContent = ({ appShareModal, setAppShareModal, displayCreatedA
                 {showDetailedStyle ? <div className='border-1 mt-7 mb-2  border-gray-200'></div> : null}
 
                 {/* Clicks, CreatedAt,  */}
-                <div className="flex flex-wrap items-center gap-4 mt-5 text-sm ">
+                <div className="flex flex-wrap items-center gap-4 mt-5 text-sm text-black">
                     {/* Clicks */}
                     <span className="flex flex-wrap items-center gap-1">
                         <ChartNoAxesColumn size={18} />

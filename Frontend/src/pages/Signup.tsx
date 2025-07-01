@@ -52,6 +52,10 @@ export default function Signup() {
         }
     }
 
+    const googleLoginHandler = async () => {
+        window.location.href = "http://localhost:3000/auth/google?mode=signup";
+    }
+
 
     return (
         <AuthLayout imageUrl={`/signup_image.png`} imageDescription="Power your links, QR Codes, and landing pages with Bitly's Connections Platform.">
@@ -63,7 +67,7 @@ export default function Signup() {
                 </p>
 
                 <div className="space-y-3">
-                    <button className="w-full border px-4 py-2 rounded flex items-center justify-center gap-2 cursor-pointer">
+                    <button onClick={googleLoginHandler} className="w-full border px-4 py-2 rounded flex items-center justify-center gap-2 cursor-pointer">
                         <span><img src="/google-icon.png" className="w-[25px]" alt="" /></span> Continue with Google
                     </button>
                 </div>

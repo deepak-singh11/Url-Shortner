@@ -13,11 +13,19 @@ const userSchema=new mongoose.Schema({
     },
     password:{
         type:String,
-        required:true,
+        required:function (this:any){
+            return this.authProvider==="local";
+        },
         minLength:6,
     },
     profileImage:{
         type:String,
+    },
+    authProvider: {
+        type:String,
+        enum:['local','google'],
+        required:true,
+        default:'local'
     },
     joinedAt:{
         type:Date,

@@ -49,6 +49,7 @@ const ProfileComponent=() => {
     }
   }
 
+
   // Password Updater
   const updatePasswordHandler = async () => {
     if (confirmPassword != newPassword)
@@ -188,9 +189,9 @@ const ProfileComponent=() => {
           </div>
 
           {/* Change Password */}
-          <div className="mb-6 pb-6 border-b-2 border-gray-200 ">
+          <div className={`mb-6 pb-6 border-b-2 border-gray-200 `}>
             <h3 className="text-xl font-semibold mb-2">Change Password</h3>
-            <div className="space-y-4">
+            <div  className="space-y-4">
               <input
                 type="password"
                 placeholder="Current password"

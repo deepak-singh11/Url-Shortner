@@ -7,12 +7,11 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import cors from 'cors';
 import "dotenv/config";
+import qrRoutes from './routes/qrRoutes.js';
 
 // Google imports
-// import googleAuthRoute from './routes/googleAuthRoute.js'
-// import session from 'express-session';
-// import passport from 'passport';
-// import './auth/google.js';
+import googleAuthRoute from './routes/googleAuthRoute.js'
+import './auth/google.js';
 
 const app=express();
 const PORT=process.env.PORT|| 3000;
@@ -31,22 +30,12 @@ app.use(cors({
 
 }))
 
-// Session setup (needed by passport)
-// app.use(session({
-//   secret: 'your_secret_key',
-//   resave: false,
-//   saveUninitialized: true
-// }));
-
-// Initialize passport
-// app.use(passport.initialize());
-// app.use(passport.session());
-
 // @ts-ignore
 app.get("/:slug",validateShortUrl,redirectFullUrl)
 app.use("/api/v1/url",urlRoutes);
-app.use("/api/v1/user",userRoutes)
-// app.use("/auth",googleAuthRoute);
+app.use("/api/v1/user",userRoutes);
+app.use("/api/qr/",qrRoutes);
+app.use("/auth",googleAuthRoute);
 
 app.listen(3000, ()=>{
     connectDB();

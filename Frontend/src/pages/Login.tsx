@@ -2,12 +2,11 @@
 import { updateUserData, updateLocation, updateTokenExpiry } from "@/redux/slices/userSlice";
 import AuthLayout from "../Components/AuthLayout";
 import { useNavigate } from "react-router-dom";
-import type { RootState } from "@/redux/store";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 type LoginDataType = {
@@ -17,11 +16,29 @@ type LoginDataType = {
 
 export default function Login() {
 
+    const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { userData, tokenExpiry } = useSelector((state: RootState) => state.user);
-
     const [loginData, setLoginData] = useState<LoginDataType>({ email: "", password: "" });
+
+    useEffect(() => {
+
+        const params = new URLSearchParams(location.search);
+        const token = params.get("token");
+        const username = params.get("username");
+        const email = params.get("email");
+        const profileImage = params.get("profileImage");
+        const joinedAt = params.get("joinedAt");
+        if (token && email) {
+
+            dispatch(updateUserData({ username, email, profileImage, joinedAt }));
+            dispatch(updateTokenExpiry({ expiresAt: Date.now() + 3600000 }));
+            navigate('/home');
+
+            //   clean URL
+            navigate("/login", { replace: true });
+        }
+    }, [dispatch, navigate, location.search]);
 
     // Submit-Handler
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,13 +69,9 @@ export default function Login() {
     }
 
     // Google Login Handler
-    const googleLoginHandler=async()=>{
-        const response=await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/google`,{withCredentials:true});
-        console.log(response);
+    const googleLoginHandler = async () => {
+        window.location.href = "http://localhost:3000/auth/google?mode=login";
     }
-
-    console.log("userData in store is: ", userData);
-    console.log("token expiry", tokenExpiry);
 
     return (
         <AuthLayout imageUrl={"/login_image.png"} imageDescription="Analyze your links and QR Codes as easily as creating them">
@@ -71,7 +84,7 @@ export default function Login() {
                 </p>
 
                 <div className="space-y-3">
-                    <button 
+                    <button
                         onClick={googleLoginHandler}
                         className="w-full border px-4 py-2 rounded flex items-center justify-center gap-2 cursor-pointer">
                         <span><img src="/google-icon.png" className="w-[25px]" alt="" /></span> Continue with Google

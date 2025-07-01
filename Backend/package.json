@@ -28,6 +28,7 @@
     "nanoid": "^5.1.5",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
+    "qrcode": "^1.5.4",
     "ua-parser-js": "^2.0.3"
   },
   "devDependencies": {
@@ -39,6 +40,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/nanoid": "^2.1.0",
     "@types/passport-google-oauth20": "^2.0.16",
+    "@types/qrcode": "^1.5.5",
     "@types/ua-parser-js": "^0.7.39",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",

@@ -10,7 +10,7 @@ const DevicePieChart = () => {
   console.log(deviceData);
   return (
     <div className='rounded-lg w-[50%] flex flex-col items-center bg-white py-5'>
-      <h3 className="text-lg font-semibold ">Referrers </h3>
+      <h3 className="text-lg font-semibold text-black">Referrers </h3>
       <div style={{ width: "100%", height: 300 }}>
         <ResponsiveContainer>
           <PieChart>

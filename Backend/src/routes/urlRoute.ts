@@ -15,9 +15,6 @@ Router.get("/allSlugs",authMiddleware,getAllSlugs)
 Router.get("/slugStats/:slug",authMiddleware,slugOwnerAuthMiddleware,slugStats)
 // @ts-ignore
 Router.get("/slugInfo/:slug",authMiddleware,slugOwnerAuthMiddleware,slugInfo)
-// @ts-ignore
-// Router.put("/redirect/update/:slug",authMiddleware,slugOwnerAuthMiddleware,redirectUpdate)
-
 
 
 export default Router;

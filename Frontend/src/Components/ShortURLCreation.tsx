@@ -51,8 +51,8 @@ export default function ShortLinkCreation({ setNewUrlUpdated }: ShortLinkCreatio
 
   return (
     <div className=" bg-[#5fa0eb2d] flex justify-center items-center rounded-xl">
-      <div className="max-w-md mx-auto my-10 bg-white p-6 shadow border rounded-lg">
-        <h2 className="text-2xl font-bold mb-4 text-center">🔗 Create Short URL</h2>
+      <div className="max-w-md mx-auto my-10 bg-white p-6 shadow border rounded-lg ">
+        <h2 className="text-2xl font-bold mb-4 text-center text-black">🔗 Create Short URL</h2>
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Original Url */}
@@ -60,16 +60,17 @@ export default function ShortLinkCreation({ setNewUrlUpdated }: ShortLinkCreatio
             type="url"
             name="originalUrl"
             placeholder="Original URL"
-            className="w-full border px-4 py-2 rounded"
+            className="w-full border px-4 py-2 rounded text-black"
             onChange={handleChange}
             required
           />
+
           {/* Custom Slug */}
           <input
             type="text"
             name="customSlug"
             placeholder="Custom Slug (optional)"
-            className="w-full border px-4 py-2 rounded"
+            className="w-full border px-4 py-2 rounded text-black"
             onChange={handleChange}
           />
           {/* Click Limit */}
@@ -77,7 +78,7 @@ export default function ShortLinkCreation({ setNewUrlUpdated }: ShortLinkCreatio
             type="number"
             name="clickLimit"
             placeholder="Click Limit (optional)"
-            className="w-full border px-4 py-2 rounded"
+            className="w-full border px-4 py-2 rounded text-black"
             onChange={handleChange}
           />
           {/* Expiry Date */}
@@ -85,7 +86,7 @@ export default function ShortLinkCreation({ setNewUrlUpdated }: ShortLinkCreatio
             type="datetime-local"
             name="expiresAt"
             placeholder="Expires At (optional)"
-            className="w-full border px-4 py-2 rounded"
+            className="w-full border px-4 py-2 rounded text-black"
             onChange={handleChange}
           />
           {/* Submit Button & Loading Button*/}

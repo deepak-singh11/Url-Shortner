@@ -6,12 +6,12 @@ import CountryBarChart from "@/Components/charts/CountryBarChart";
 import DevicePieChart from "@/Components/charts/DevicePieChart";
 import ClickLineChart from "@/Components/charts/ClickLineChart";
 import CityBarChart from "@/Components/charts/CityBarChart";
+import type { RootState } from "@/redux/store";
 import { useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import type { RootState } from "@/redux/store";
 import axios from "axios";
 
 interface LocationType {
@@ -33,7 +33,6 @@ interface UrlStats {
 const URLStats = () => {
 
     const [showDetailedStyle, setShowDetailedStyle] = useState(false);
-
     const { urlStats, clickedAtData, deviceData } = useSelector((state: RootState) => state.urlStats)
 
     console.log("urlStats value is: ", urlStats, clickedAtData, deviceData)

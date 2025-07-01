@@ -48,6 +48,7 @@ const signupRoute = async (req: Request, res: Response) => {
                 username,
                 email,
                 profileImage: newUser.profileImage,
+                authProvider:'local',
                 joinedAt: newUser.joinedAt,
             },
             tokenExpiry: {
@@ -76,6 +77,9 @@ const   signinRoute = async (req: Request, res: Response) => {
         const userExist = await userModel.findOne({ email });
         if (!userExist)
             return res.status(403).json({ message: "User didn't exist. Try different email" });
+
+        if(!userExist.password)
+            return res.status(404).json({message:"you have signed up using google"});
 
         // Password Matched?
         const isPasswordCorrect = await bcrypt.compare(password, userExist.password);
@@ -131,6 +135,9 @@ const profileUpdateRoute = async (req: Request, res: Response) => {
 
         if (newUsername)
             userDoc.username = newUsername;
+
+        if(!userDoc.password)
+            return res.status(404).json({message:"You Can't change password, as you signup with google"})
 
         if (newPassword && currentPassword) {
             const isPasswordCorrect = await bcrypt.compare(currentPassword, userDoc.password,);
@@ -197,7 +204,7 @@ const deleteAccount = async (req: Request, res: Response) => {
         const userDoc = req.userDoc;
 
         await userDoc.deleteOne();
-
+        
         res.status(200).json({ message: "Account deleted successfully" });
 
     } catch (error) {
