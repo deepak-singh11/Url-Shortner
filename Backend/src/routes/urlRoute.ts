@@ -1,7 +1,6 @@
 import express from 'express';
 import "dotenv/config";
-import  {createShortUrl,redirectFullUrl,getAllSlugs,slugStats,redirectUpdate,slugInfo } from '../controller/urlControllers.js';
-import { validateShortUrl } from '../middleware/validateSlugMiddleware.js';
+import  {createShortUrl,getAllSlugs,slugStats,slugInfo } from '../controller/urlControllers.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
 import { slugOwnerAuthMiddleware } from '../middleware/slugOwnerAuthMiddleware.js';
 

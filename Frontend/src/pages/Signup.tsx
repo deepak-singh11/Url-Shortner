@@ -3,7 +3,7 @@ import AuthLayout from "../Components/AuthLayout";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { updateUserData,updateTokenExpiry, updateLocation} from "@/redux/slices/userSlice";
+import { updateUserData, updateTokenExpiry, updateLocation } from "@/redux/slices/userSlice";
 import { toast } from 'react-hot-toast';
 import { useState } from "react";
 import axios from "axios";
@@ -17,7 +17,7 @@ interface SignupDataType {
 
 export default function Signup() {
 
-    const dispatch=useDispatch();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [signupData, setSignupData] = useState<SignupDataType>({ username: "", email: "", password: "" })
 
@@ -66,14 +66,14 @@ export default function Signup() {
                     <Link to={"/"} className="text-blue-600 font-medium">Log in</Link>
                 </p>
 
-                <div className="space-y-3">
+                 <div className="space-y-3">
                     <button onClick={googleLoginHandler} className="w-full border px-4 py-2 rounded flex items-center justify-center gap-2 cursor-pointer">
                         <span><img src="/google-icon.png" className="w-[25px]" alt="" /></span> Continue with Google
                     </button>
                 </div>
 
-                <div className="divider">OR</div>   
 
+                <div className="divider">OR</div>
 
                 <form className="space-y-4" onSubmit={submitHandler}>
                     <div>

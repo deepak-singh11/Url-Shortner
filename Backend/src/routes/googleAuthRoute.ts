@@ -24,8 +24,7 @@ router.get('/google', (req,res,next)=>{
 // Step 2: Callback after login-->	Receives the response from Google and redirects to frontend(if successed).
 // @ts-ignore
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login', session: false }), async(req, res) => {
-  
-  
+
   const mode=req.cookies.oauthMode;
   res.clearCookie('oauthMode');
 
@@ -92,21 +91,5 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
   }
 }
 );
-
-// const secret = process.env.JWT_SECRET!;
-// const token = jwt.sign({ id: userData.id }, secret);
-
-
-// return res.status(200).json({
-//   message: "LoggedIn Succesfully",
-//   userData: {
-//     username: userData.username,
-//     email: userData.email,
-//     profileImage: userData.profileImage,
-//     joinedAt: userData.joinedAt,
-//   },
-//   tokenExpiry: { expiresAt: Date.now() + expiresAt }
-// });
-
 
 export default router;

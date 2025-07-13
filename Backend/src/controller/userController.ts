@@ -55,6 +55,7 @@ const signupRoute = async (req: Request, res: Response) => {
                 expiresAt: Date.now() + expiresAt,
             }
         });
+
         
 
     } catch (error) {
